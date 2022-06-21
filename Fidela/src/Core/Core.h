@@ -8,4 +8,6 @@
 		__debugbreak();\
 	}\
 
+//#define EVENT_FN(function) [this](Fidela::WindowCloseEvent e) { CloseWindow(e); }
+
 #endif

@@ -130,13 +130,14 @@ namespace Fidela
 		std::cout << std::put_time(&s_TimeInfo, "[%a %b %d %H:%M:%S %Y]\t");
 		std::cout << FILENAME(location.file_name()) << "(" << location.line() << ":" << location.column() << ") '" << location.function_name() << "'\t\t";
 		std::cout << std::vformat(message, std::make_format_args(args...));
-		std::cout << ResetColour;
+		std::cout << ResetColour << '\n';
 		if (s_FileOutput.is_open())
 		{
 			s_FileOutput << std::setw(12) << std::setfill(' ') << std::left << data.Label;
 			s_FileOutput << std::put_time(&s_TimeInfo, "[%a %b %d %H:%M:%S %Y]\t");
-			std::cout << FILENAME(location.file_name()) << "(" << location.line() << ":" << location.column() << ") '" << location.function_name() << "'\t\t";
+			s_FileOutput << FILENAME(location.file_name()) << "(" << location.line() << ":" << location.column() << ") '" << location.function_name() << "'\t\t";
 			s_FileOutput << std::vformat(message, std::make_format_args(args...));
+			s_FileOutput << '\n';
 		}
 	}
 }

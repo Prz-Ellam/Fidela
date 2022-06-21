@@ -19,14 +19,25 @@ namespace Fidela
 		int result = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
 		m_WindowCloseEventFn = [](WindowCloseEvent e) {};
+		m_WindowMoveEventFn = [](WindowMoveEvent e) {};
 
 		glfwSetWindowCloseCallback(m_Window, StaticWindowCloseEvent);
 		glfwSetWindowUserPointer(m_Window, this);
+
+		glfwSetWindowPosCallback(m_Window, StaticWindowMoveEvent);
+
+		glfwSetWindowSizeCallback(m_Window, GLFWwindowsizefun);
+
 	}
 
 	GLFWWindow::~GLFWWindow()
 	{
 		delete m_Window;
+	}
+
+	void* GLFWWindow::GetNativeWindow() const
+	{
+		return m_Window;
 	}
 
 	std::string GLFWWindow::GetTitle() const
@@ -63,8 +74,24 @@ namespace Fidela
 		window->m_WindowCloseEventFn(WindowCloseEvent());
 	}
 
+	void GLFWWindow::StaticWindowMoveEvent(GLFWwindow* glfwWindow, int x, int y)
+	{
+		GLFWWindow* window = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(glfwWindow));
+		window->m_WindowMoveEventFn(WindowMoveEvent(x, y));
+	}
+
 	void GLFWWindow::SetWindowCloseEvent(WindowCloseEventFn windowCloseEventFn)
 	{
 		m_WindowCloseEventFn = windowCloseEventFn;
+	}
+
+	void GLFWWindow::SetWindowMoveEvent(WindowMoveEventFn windowMoveEventFn)
+	{
+		m_WindowMoveEventFn = windowMoveEventFn;
+	}
+
+	void GLFWWindow::StaticWindowResizeEvent(GLFWwindow* glfwWindow, uint32_t width, uint32_t height)
+	{
+		
 	}
 }

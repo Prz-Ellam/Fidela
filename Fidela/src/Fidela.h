@@ -4,7 +4,9 @@
 
 #include "fdlpch.h"
 #include "Application/Application.h"
+#include "Application/Layer.h"
 #include "Core/Core.h"
+#include "Logging/Log.h"
 #include "Window/Window.h"
 #include "Window/Platform/GLFW/GLFWWindow.h"
 

@@ -3,6 +3,7 @@
 #define _FIDELA_APPLICATION_H_
 
 #include "Window/Window.h"
+#include "Layer.h"
 
 /*
 	Crear una aplicacion en el cliente utilizando esta macro
@@ -30,7 +31,8 @@ namespace Fidela
 		virtual void Destroy() = 0;
 	protected:
 		bool m_Running = true;
-		Window* m_Window;
+		std::unique_ptr<Window> m_Window = nullptr;
+		std::vector<std::unique_ptr<Layer>> m_Layers;
 	};
 }
 

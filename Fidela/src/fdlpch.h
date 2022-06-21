@@ -2,6 +2,8 @@
 #ifndef _FIDELA_PCH_H_
 #define _FIDELA_PCH_H_
 
+#if __cplusplus
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -36,5 +38,7 @@
 // C++20
 #include <format>
 #include <source_location>
+
+#endif
 
 #endif // _FIDELA_PCH_H_
